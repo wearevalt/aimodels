@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — Newsletter</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07);--ok:#10b981}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:90px 1.5rem 3rem;position:relative;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(100px);opacity:.2;pointer-events:none;animation:float 14s ease-in-out infinite}
+.blob1{width:500px;height:500px;background:#7c3aed;top:-80px;left:-80px}
+.blob2{width:400px;height:400px;background:#4f46e5;bottom:-80px;right:-40px;animation-delay:4s}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-30px)}}
+/* STATE CARDS */
+.state-card{width:100%;max-width:480px;position:relative;z-index:1;text-align:center}
+/* CONFIRMED */
+.confirm-icon{width:88px;height:88px;border-radius:50%;background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem;position:relative}
+.confirm-icon::after{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(16,185,129,.1)}
+.confirm-icon svg{width:44px;height:44px;stroke:#34d399;fill:none;stroke-width:2;stroke-linecap:round}
+.state-title{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.875rem;line-height:1.2}
+.state-sub{font-size:1rem;color:var(--fg2);max-width:380px;margin:0 auto 2.5rem;line-height:1.75}
+/* PERKS */
+.perks{display:flex;flex-direction:column;gap:.875rem;margin-bottom:2.5rem;text-align:left;background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
+.perk{display:flex;align-items:flex-start;gap:.875rem}
+.perk-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.perk-icon svg{width:18px;height:18px;fill:none;stroke-width:2;stroke-linecap:round}
+.perk-title{font-size:.9rem;font-weight:600;color:#fff;margin-bottom:.2rem}
+.perk-desc{font-size:.8125rem;color:var(--fg3);line-height:1.5}
+/* ACTIONS */
+.actions{display:flex;flex-direction:column;gap:.75rem;align-items:center}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.875rem 2.5rem;border-radius:14px;background:#fff;color:#000;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;width:100%;max-width:300px}
+.btn-primary:hover{background:#e4e4e7;transform:translateY(-1px)}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.75rem 2rem;border-radius:14px;border:1px solid var(--border);color:var(--fg2);font-size:.9rem;font-weight:500;text-decoration:none;transition:all .2s;background:transparent;cursor:pointer;width:100%;max-width:300px}
+.btn-ghost:hover{border-color:rgba(139,92,246,.4);color:#fff;background:var(--vi3)}
+/* ALREADY SUBSCRIBED */
+.already-icon{width:88px;height:88px;border-radius:50%;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem}
+.already-icon svg{width:40px;height:40px;stroke:#fbbf24;fill:none;stroke-width:2;stroke-linecap:round}
+/* UNSUB */
+.unsub-icon{width:88px;height:88px;border-radius:50%;background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 2rem}
+.unsub-icon svg{width:40px;height:40px;stroke:#fb7185;fill:none;stroke-width:2;stroke-linecap:round}
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:1.5rem clamp(1rem,4vw,3rem)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.footer-nav{display:flex;gap:1.5rem}
+.footer-nav a{font-size:.8125rem;color:var(--fg3);text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+      <span class="logo-name">Valtlens</span>
+    </a>
+  </div>
+</nav>
+
+<main>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="state-card" id="stateCard">
+    <!-- Injected by JS -->
+  </div>
+</main>
+
+<footer>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="footer-nav">
+      <a href="/">Accueil</a>
+      <a href="/blog/">Journal</a>
+      <a href="/submit/">Soumettre</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var STATES = {
+  confirmed: {
+    html: function(email) {
+      return '<div class="confirm-icon"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></div>'+
+        '<h1 class="state-title">Vous êtes abonné(e) !</h1>'+
+        '<p class="state-sub">Bienvenue dans la communauté Valtlens. '+(email?'Un email de confirmation a été envoyé à <strong>'+email+'</strong>.':'Vous recevrez nos updates directement dans votre boîte mail.')+'</p>'+
+        '<div class="perks">'+
+          '<div class="perk">'+
+            '<div class="perk-icon" style="background:rgba(139,92,246,.15)"><svg viewBox="0 0 24 24" stroke="#c4b5fd"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>'+
+            '<div><div class="perk-title">Releases en avant-première</div><div class="perk-desc">Soyez les premiers informés des nouveaux modèles IA vidéo</div></div>'+
+          '</div>'+
+          '<div class="perk">'+
+            '<div class="perk-icon" style="background:rgba(6,182,212,.15)"><svg viewBox="0 0 24 24" stroke="#67e8f9"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>'+
+            '<div><div class="perk-title">Tutoriels exclusifs</div><div class="perk-desc">Des guides pratiques pour maîtriser les meilleurs outils IA</div></div>'+
+          '</div>'+
+          '<div class="perk">'+
+            '<div class="perk-icon" style="background:rgba(16,185,129,.15)"><svg viewBox="0 0 24 24" stroke="#6ee7b7"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>'+
+            '<div><div class="perk-title">Aucun spam garanti</div><div class="perk-desc">Maximum 1 email par semaine, désabonnement en 1 clic</div></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="actions">'+
+          '<a class="btn-primary" href="/">← Retour à l\'annuaire</a>'+
+          '<a class="btn-ghost" href="/blog/">Lire le journal</a>'+
+        '</div>';
+    }
+  },
+  already: {
+    html: function(email) {
+      return '<div class="already-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>'+
+        '<h1 class="state-title">Déjà abonné(e)</h1>'+
+        '<p class="state-sub">'+(email?'L\'adresse <strong>'+email+'</strong> est':'Cette adresse est')+' déjà inscrite à notre newsletter. Vous recevez déjà nos updates !</p>'+
+        '<div class="actions">'+
+          '<a class="btn-primary" href="/">← Retour à l\'annuaire</a>'+
+          '<button class="btn-ghost" onclick="simulateUnsub()">Se désabonner</button>'+
+        '</div>';
+    }
+  },
+  unsubscribed: {
+    html: function() {
+      return '<div class="unsub-icon"><svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div>'+
+        '<h1 class="state-title">Désabonné(e)</h1>'+
+        '<p class="state-sub">Vous avez été retiré(e) de notre liste. Vous ne recevrez plus nos emails. Vous pouvez vous réabonner à tout moment.</p>'+
+        '<div class="actions">'+
+          '<a class="btn-primary" href="/">← Retour à l\'annuaire</a>'+
+          '<button class="btn-ghost" onclick="simulateResub()">Se réabonner</button>'+
+        '</div>';
+    }
+  }
+};
+
+function getParam(n){ return new URLSearchParams(window.location.search).get(n); }
+
+function render(state, email) {
+  var s = STATES[state];
+  if (!s) { render('confirmed', email); return; }
+  document.getElementById('stateCard').innerHTML = s.html(email);
+}
+
+function simulateUnsub() {
+  render('unsubscribed', null);
+  showToast('Désabonnement effectué');
+}
+
+function simulateResub() {
+  render('confirmed', null);
+  showToast('Réabonnement effectué !');
+}
+
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},3000);
+}
+
+// Init — détecte l'état via URL params
+// /newsletter/?status=confirmed&email=test@test.com
+// /newsletter/?status=already
+// /newsletter/?status=unsubscribed
+var status = getParam('status') || 'confirmed';
+var email = getParam('email');
+render(status, email);
+</script>
+</body>
+</html>
