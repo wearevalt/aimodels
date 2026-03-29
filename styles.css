@@ -85,9 +85,22 @@ body {
     z-index: 1;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .logo-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     animation: float 3s ease-in-out infinite;
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
 }
 
 .logo h1 {

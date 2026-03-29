@@ -282,19 +282,19 @@ function createModelCard(model, index) {
         <div class="meta">
             <div class="meta-item">
                 <span>⏱️</span>
-                <strong>Duration:</strong> ${model.maxDuration}
+                <strong>Durée:</strong> ${model.maxDuration}
             </div>
             <div class="meta-item">
                 <span>📺</span>
-                <strong>Resolution:</strong> ${model.resolution}
+                <strong>Résolution:</strong> ${model.resolution}
             </div>
             <div class="meta-item">
                 <span>💰</span>
-                <strong>Pricing:</strong> ${model.pricing}
+                <strong>Tarification:</strong> ${model.pricing}
             </div>
             <div class="meta-item">
                 <span>✨</span>
-                <strong>Best For:</strong> ${model.bestFor}
+                <strong>Idéal Pour:</strong> ${model.bestFor}
             </div>
         </div>
         <div class="tags">
@@ -305,7 +305,7 @@ function createModelCard(model, index) {
                 <span>${stars}</span>
                 <span>${model.rating}</span>
             </div>
-            <a href="${model.url}" target="_blank" class="btn card-btn">🚀 Visit →</a>
+            <a href="${model.url}" target="_blank" class="btn card-btn">🚀 Visiter →</a>
         </div>
     `;
     
