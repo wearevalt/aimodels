@@ -242,7 +242,6 @@ body {
     position: relative;
     border: 1px solid rgba(139, 92, 246, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-    overflow: hidden;
 }
 
 .featured-card::before {
@@ -254,6 +253,8 @@ body {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.15), transparent);
     transition: left 0.6s ease;
+    border-radius: 16px;
+    z-index: -1;
 }
 
 .featured-card:hover::before {
@@ -405,7 +406,6 @@ body {
     border: 1px solid rgba(139, 92, 246, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     position: relative;
-    overflow: hidden;
 }
 
 .model-card::before {
@@ -417,6 +417,8 @@ body {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.1), transparent);
     transition: left 0.5s ease;
+    border-radius: 16px;
+    z-index: -1;
 }
 
 .model-card:hover::before {
