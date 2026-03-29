@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — Politique de Confidentialité</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07)}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-submit-nav{padding:.45rem 1.1rem;border-radius:10px;background:var(--vi3);border:1px solid rgba(139,92,246,.35);font-size:.8125rem;font-weight:600;color:#c4b5fd;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-submit-nav:hover{background:rgba(139,92,246,.25);color:#fff;border-color:rgba(139,92,246,.6)}
+.btn-submit-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.btn-login{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-login:hover{background:#e4e4e7}
+main{flex:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:3rem clamp(1rem,4vw,3rem) 2rem;margin-top:auto}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2rem;margin-bottom:2.5rem}
+.footer-logo p{font-size:.85rem;color:var(--fg3);margin-top:.75rem;line-height:1.7;max-width:220px}
+.footer-col h4{font-size:.8125rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1rem}
+.footer-col a{display:block;font-size:.875rem;color:var(--fg3);text-decoration:none;margin-bottom:.55rem;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.social-links{display:flex;gap:1rem}
+.social-links a{color:var(--fg3);transition:color .2s}
+.social-links a:hover{color:#fff}
+.social-links svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;display:block}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.page-wrap{max-width:860px;margin:0 auto;padding:110px clamp(1rem,4vw,3rem) 5rem;flex:1}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;color:var(--fg2);text-decoration:none;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:#fff}
+.back-link svg{width:16px;height:16px}
+.legal-hero{padding:2rem 0 3rem;border-bottom:1px solid var(--border);margin-bottom:3rem}.legal-hero h1{font-size:clamp(1.75rem,4vw,2.5rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem}.legal-hero p{color:var(--fg3);font-size:.9rem}.legal-body h2{font-size:1.1875rem;font-weight:700;color:#fff;margin:2.5rem 0 .875rem;padding-top:2rem;border-top:1px solid var(--border)}.legal-body h2:first-child{border-top:none;padding-top:0;margin-top:0}.legal-body p{color:var(--fg2);font-size:.9375rem;line-height:1.8;margin-bottom:1rem}.legal-body ul{color:var(--fg2);font-size:.9375rem;line-height:1.8;margin-bottom:1rem;padding-left:1.25rem}.legal-body li{margin-bottom:.4rem}.legal-body strong{color:#fff}.legal-highlight{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin:1.5rem 0;border-left:3px solid var(--vi)}.legal-highlight p{margin:0;color:var(--fg2)}
+@media(max-width:768px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1}}
+</style>
+</head>
+<body><nav>
+  <div class="nav-inner">
+    <a class="logo" href="/"><div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><span class="logo-name">Valtlens</span></a>
+    <div class="nav-links">
+      <a href="/#models">Modèles IA</a>
+      <a href="/blog/">Journal</a>
+      <a href="/api/" >API</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-submit-nav" href="/submit/"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Soumettre une IA</a>
+      <a class="btn-login" href="/auth/">Connexion</a>
+    </div>
+  </div>
+</nav><main>
+<div class="page-wrap">
+  <a class="back-link" href="/"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Retour</a>
+  <div class="legal-hero">
+    <h1>Politique de Confidentialité</h1>
+    <p>Dernière mise à jour : 29 mars 2025 &nbsp;·&nbsp; Applicable immédiatement</p>
+  </div>
+  <div class="legal-body">
+    <div class="legal-highlight"><p>Résumé : Nous collectons uniquement ce qui est nécessaire au bon fonctionnement de Valtlens. Nous ne vendons jamais vos données à des tiers.</p></div>
+
+    <h2>1. Qui sommes-nous ?</h2>
+    <p>Valtlens est un annuaire en ligne de modèles d'intelligence artificielle vidéo. Cette politique s'applique à tous les services accessibles via <strong>valtlens.vercel.app</strong> et ses sous-domaines.</p>
+
+    <h2>2. Données collectées</h2>
+    <p>Selon votre utilisation du site, nous pouvons collecter :</p>
+    <ul>
+      <li><strong>Données de compte :</strong> adresse email, prénom et nom si vous créez un compte</li>
+      <li><strong>Données de navigation :</strong> pages visitées, durée de session, type de navigateur (via cookies analytiques anonymisés)</li>
+      <li><strong>Données de formulaire :</strong> informations soumises via nos formulaires (soumission d'IA, newsletter, support)</li>
+      <li><strong>Données techniques :</strong> adresse IP, logs de connexion, informations sur l'appareil</li>
+    </ul>
+
+    <h2>3. Utilisation des données</h2>
+    <p>Vos données sont utilisées pour :</p>
+    <ul>
+      <li>Faire fonctionner et améliorer le service</li>
+      <li>Vous envoyer la newsletter si vous y êtes abonné(e)</li>
+      <li>Vous contacter en cas de soumission validée</li>
+      <li>Assurer la sécurité de la plateforme</li>
+      <li>Analyser l'utilisation du site de façon agrégée et anonyme</li>
+    </ul>
+
+    <h2>4. Cookies</h2>
+    <p>Nous utilisons des cookies de session essentiels au fonctionnement du site et, avec votre consentement, des cookies analytiques anonymisés pour comprendre l'usage du site. Aucun cookie publicitaire n'est utilisé.</p>
+
+    <h2>5. Partage des données</h2>
+    <p>Vos données ne sont <strong>jamais vendues</strong>. Elles peuvent être partagées uniquement avec :</p>
+    <ul>
+      <li><strong>Supabase</strong> — hébergement de base de données (serveurs UE)</li>
+      <li><strong>Vercel</strong> — hébergement du site (infrastructure sécurisée)</li>
+      <li>Les autorités compétentes si la loi l'exige</li>
+    </ul>
+
+    <h2>6. Vos droits</h2>
+    <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+    <ul>
+      <li>Accès à vos données personnelles</li>
+      <li>Rectification de données inexactes</li>
+      <li>Suppression de votre compte et de vos données</li>
+      <li>Portabilité de vos données</li>
+      <li>Opposition au traitement de vos données</li>
+    </ul>
+    <p>Pour exercer ces droits, contactez-nous à <strong>privacy@valtlens.com</strong></p>
+
+    <h2>7. Sécurité</h2>
+    <p>Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données contre tout accès non autorisé, perte ou destruction.</p>
+
+    <h2>8. Modifications</h2>
+    <p>Cette politique peut être mise à jour. En cas de changement significatif, nous vous en informerons par email ou via une bannière sur le site.</p>
+
+    <h2>9. Contact</h2>
+    <p>Pour toute question relative à cette politique : <strong>privacy@valtlens.com</strong></p>
+  </div>
+</div>
+</main><footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <a class="logo" href="/"><div class="logo-icon" style="width:30px;height:30px;border-radius:8px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg></div><span class="logo-name" style="font-size:1.1rem">Valtlens</span></a>
+      <p>L'annuaire premium des modèles IA vidéo. Créé par des passionnés, pour des créateurs.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Produit</h4>
+      <a href="/#models">Modèles</a>
+      <a href="/api/">API</a>
+      <a href="/submit/">Soumettre une IA</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ressources</h4>
+      <a href="/blog/">Journal</a>
+      <a href="/community/">Communauté</a>
+      <a href="/support/">Support</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a href="/legal/privacy/">Confidentialité</a>
+      <a href="/legal/terms/">CGU</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="social-links">
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S9.06 17.32 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+<script>
+var _tt;
+function showToast(m){{var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){{t.classList.remove('show');}},3000);}}
+</script></body>
+</html>
