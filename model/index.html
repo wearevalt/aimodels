@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — Détail Modèle</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07)}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-ghost{padding:.45rem 1rem;border-radius:999px;border:1px solid var(--bg4);font-size:.8125rem;font-weight:500;color:var(--fg2);background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.35rem}
+.btn-ghost:hover{border-color:var(--vi);color:#fff;background:var(--vi3)}
+.btn-cta{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-cta:hover{background:#e4e4e7;transform:translateY(-1px)}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:2.5rem clamp(1rem,4vw,3rem)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.footer-nav{display:flex;gap:1.5rem}
+.footer-nav a{font-size:.8125rem;color:var(--fg3);text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:#fff}
+/* PAGE */
+.page-wrap{max-width:1200px;margin:0 auto;padding:100px clamp(1rem,4vw,3rem) 5rem}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;color:var(--fg2);text-decoration:none;margin-bottom:2.5rem;transition:color .2s}
+.back-link:hover{color:#fff}
+.back-link svg{width:16px;height:16px}
+/* HERO MODEL */
+.model-hero{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:4rem}
+.model-badge-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap}
+.badge-cat{padding:.3rem .875rem;border-radius:999px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.badge-free{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#34d399}
+.badge-paid{background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.3);color:#c4b5fd}
+.model-name{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:.5rem}
+.model-dev{font-size:1rem;color:var(--fg3);margin-bottom:1.25rem}
+.model-desc{font-size:1.0625rem;color:var(--fg2);line-height:1.75;margin-bottom:2rem}
+.model-stats{display:flex;gap:2rem;margin-bottom:2rem;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-val{font-size:1.75rem;font-weight:700;color:#fff;display:block}
+.stat-label{font-size:.75rem;color:var(--fg3);margin-top:.15rem}
+.model-actions{display:flex;gap:.875rem;flex-wrap:wrap}
+.btn-primary{padding:.75rem 1.75rem;border-radius:14px;background:#fff;color:#000;font-size:.9375rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.btn-primary:hover{background:#e4e4e7;transform:translateY(-1px)}
+.btn-primary svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:2;stroke-linecap:round}
+.btn-secondary{padding:.75rem 1.75rem;border-radius:14px;background:var(--vi3);color:#c4b5fd;font-size:.9375rem;font-weight:600;border:1px solid rgba(139,92,246,.3);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem}
+.btn-secondary:hover{background:rgba(139,92,246,.25);color:#fff}
+/* VISUAL CARD */
+.model-visual{border-radius:24px;overflow:hidden;background:linear-gradient(160deg,#18181b,#111113);border:1px solid var(--border);height:360px;display:flex;align-items:center;justify-content:center;position:relative}
+.model-visual-bg{position:absolute;inset:0;opacity:.25}
+.model-visual-icon{position:relative;z-index:1;width:100px;height:100px;border-radius:24px;display:flex;align-items:center;justify-content:center}
+.model-visual-icon svg{width:52px;height:52px;fill:#fff}
+/* RATING STARS */
+.stars{display:flex;gap:2px}
+.star-full{color:#eab308;font-size:1.1rem}
+.star-empty{color:var(--fg3);font-size:1.1rem}
+/* TABS */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2.5rem}
+.tab-btn{padding:.75rem 1.5rem;font-size:.9rem;font-weight:500;color:var(--fg3);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.tab-btn:hover{color:var(--fg2)}
+.tab-btn.active{color:#fff;border-bottom-color:var(--vi)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+/* SPECS */
+.specs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem;margin-bottom:2rem}
+.spec-card{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.25rem}
+.spec-label{font-size:.75rem;color:var(--fg3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.5rem}
+.spec-val{font-size:1rem;font-weight:600;color:#fff}
+/* TAGS */
+.tags-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
+.tag{padding:.3rem .75rem;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:.8125rem;color:var(--fg2)}
+/* SIMILAR */
+.similar-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+.similar-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1.25rem;cursor:pointer;transition:all .3s;text-decoration:none;display:block}
+.similar-card:hover{border-color:rgba(139,92,246,.3);transform:translateY(-3px)}
+.similar-name{font-size:.9375rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.similar-dev{font-size:.8rem;color:var(--fg3)}
+/* SECTION TITLE */
+.section-h2{font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:1.25rem;padding-top:2rem}
+/* REVIEW */
+.review-card{background:var(--bg3);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1rem}
+.review-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem}
+.reviewer{font-size:.875rem;font-weight:600;color:#fff}
+.review-date{font-size:.75rem;color:var(--fg3)}
+.review-text{font-size:.875rem;color:var(--fg2);line-height:1.7}
+/* NOT FOUND */
+.not-found{text-align:center;padding:8rem 2rem}
+.not-found svg{width:64px;height:64px;stroke:var(--fg3);margin:0 auto 1.5rem;display:block}
+@media(max-width:768px){.model-hero{grid-template-columns:1fr}.model-visual{height:240px}.nav-links{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+      <span class="logo-name">Valtlens</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#models">Modèles IA</a>
+      <a href="/blog/">Journal</a>
+      <a href="/#newsletter">Newsletter</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-ghost" href="/submit/">Soumettre une IA</a>
+      <a class="btn-cta" href="/auth/">Se connecter</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap" id="pageWrap">
+  <!-- Injected by JS -->
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="footer-nav">
+      <a href="/">Accueil</a>
+      <a href="/blog/">Journal</a>
+      <a href="/submit/">Soumettre</a>
+      <a href="/auth/">Connexion</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var MODELS = [
+  {id:'sora',name:'Sora',developer:'OpenAI',description:'Le modèle text-to-video révolutionnaire d\'OpenAI capable de générer des scènes cinématographiques ultra-réalistes à partir d\'une simple description textuelle. Sora représente une avancée majeure dans la génération vidéo par IA, produisant des vidéos jusqu\'à 60 secondes avec une cohérence temporelle remarquable.',rating:4.9,tags:['Text-to-Video','High Quality','Cinematic','Long Duration'],categories:['text-to-video'],url:'https://openai.com/sora',color:'violet',icon:'#8b5cf6',colorBg:'rgba(139,92,246,.25)',free:false,maxDuration:'60s',resolution:'1080p',speed:'2-5 min',api:true,specs:{Durée:'Jusqu\'à 60 secondes',Résolution:'1080p',Style:'Cinématographique',Accès:'API + Web',Prix:'Inclus ChatGPT Plus'}},
+  {id:'runway',name:'Runway Gen-3',developer:'Runway',description:'La plateforme de génération vidéo professionnelle la plus utilisée dans l\'industrie. Runway Gen-3 offre un contrôle avancé du mouvement, des transitions fluides et des outils d\'édition en temps réel qui en font le choix de référence pour les créateurs professionnels.',rating:4.8,tags:['Professional','Motion Control','Editing'],categories:['text-to-video','image-to-video'],url:'https://runwayml.com',color:'indigo',icon:'#6366f1',colorBg:'rgba(99,102,241,.25)',free:false,specs:{Durée:'4-16 secondes',Résolution:'1280×768',Style:'Professionnel',Accès:'Web App',Prix:'À partir de $12/mois'}},
+  {id:'pika',name:'Pika 1.0',developer:'Pika Labs',description:'Pika Labs propose une génération vidéo rapide et accessible avec des capacités d\'édition avancées. Son interface web intuitive et ses fonctionnalités de modification en temps réel en font un outil idéal pour les créateurs de contenu.',rating:4.7,tags:['Fast','Editing','Web App','Free'],categories:['text-to-video','image-to-video','free'],url:'https://pika.art',color:'cyan',icon:'#06b6d4',colorBg:'rgba(6,182,212,.25)',free:true,specs:{Durée:'3-10 secondes',Résolution:'1080p',Style:'Polyvalent',Accès:'Web App',Prix:'Gratuit + Premium'}},
+  {id:'stable-video',name:'Stable Video',developer:'Stability AI',description:'Le modèle open source de référence pour la génération image-à-vidéo. Avec 1.3 milliards de paramètres, Stable Video Diffusion offre une personnalisation maximale et peut être déployé localement sur votre propre infrastructure.',rating:4.8,tags:['Open Source','Self-hosted','Free','Img2Vid'],categories:['image-to-video','free'],url:'https://stability.ai',color:'pink',icon:'#ec4899',colorBg:'rgba(236,72,153,.25)',free:true,specs:{Durée:'2-4 secondes',Résolution:'1024×576',Style:'Configurable',Accès:'Open Source',Prix:'100% Gratuit'}},
+  {id:'kling',name:'Kling',developer:'Kuaishou',description:'Développé par Kuaishou, Kling est un modèle de génération vidéo avec des dynamiques de mouvement impressionnantes. Son accès gratuit et sa qualité surprenante en font une alternative compétitive aux solutions payantes.',rating:4.6,tags:['Long Duration','Social Media','Free'],categories:['text-to-video','free'],url:'https://kling.kuaishou.com',color:'emerald',icon:'#10b981',colorBg:'rgba(16,185,129,.25)',free:true,specs:{Durée:'5-10 secondes',Résolution:'1080p',Style:'Dynamique',Accès:'Web App',Prix:'Gratuit (limité)'}},
+  {id:'heygen',name:'HeyGen',developer:'HeyGen',description:'HeyGen est spécialisé dans la création d\'avatars IA ultra-réalistes avec synchronisation labiale parfaite dans plus de 40 langues. La solution de référence pour les entreprises qui veulent produire du contenu vidéo multilingue à grande échelle.',rating:4.7,tags:['AI Avatars','Lip-Sync','Enterprise'],categories:['text-to-video'],url:'https://heygen.com',color:'rose',icon:'#f43f5e',colorBg:'rgba(244,63,94,.25)',free:false,specs:{Durée:'Illimitée',Résolution:'1080p',Style:'Avatar IA',Accès:'Web App',Prix:'À partir de $24/mois'}},
+  {id:'synthesia',name:'Synthesia',developer:'Synthesia',description:'La plateforme enterprise de référence pour la formation et la communication interne par vidéo IA. Synthesia permet de créer des vidéos professionnelles avec des avatars IA dans 120+ langues sans équipement de tournage.',rating:4.5,tags:['Enterprise','Multi-Language','Training'],categories:['text-to-video'],url:'https://synthesia.io',color:'blue',icon:'#3b82f6',colorBg:'rgba(59,130,246,.25)',free:false,specs:{Durée:'Illimitée',Résolution:'1080p',Style:'Corporate',Accès:'Web App',Prix:'À partir de $29/mois'}},
+  {id:'luma',name:'Luma Dream Machine',developer:'Luma AI',description:'Luma Dream Machine produit des vidéos de haute qualité avec des mouvements de caméra cinématographiques fluides. Sa rapidité de génération et son accès gratuit en font un excellent point d\'entrée dans l\'univers de l\'IA vidéo.',rating:4.4,tags:['Fast Generation','High Quality','Free'],categories:['text-to-video','free'],url:'https://lumalabs.ai',color:'fuchsia',icon:'#d946ef',colorBg:'rgba(217,70,239,.25)',free:true,specs:{Durée:'5 secondes',Résolution:'1080p',Style:'Cinématographique',Accès:'Web App',Prix:'Gratuit + Pro'}}
+];
+
+var REVIEWS = [
+  {author:'Thomas R.',date:'Il y a 3 jours',rating:5,text:'Qualité cinématographique bluffante. J\'ai pu créer des séquences que je n\'aurais jamais pu produire avec mon équipe en si peu de temps.'},
+  {author:'Sophie M.',date:'Il y a 1 semaine',rating:4,text:'Très impressionnant pour un premier essai. La cohérence temporelle est bien meilleure que la concurrence, même si certains détails peuvent parfois être incorrects.'},
+  {author:'Karim B.',date:'Il y a 2 semaines',rating:5,text:'Révolutionnaire. Je l\'utilise pour mes projets de publicité et le résultat dépasse mes attentes à chaque fois.'}
+];
+
+function getParam(name){
+  var params=new URLSearchParams(window.location.search);
+  return params.get(name);
+}
+
+function stars(n){
+  var s='';
+  for(var i=1;i<=5;i++) s+='<span class="'+(i<=n?'star-full':'star-empty')+'">★</span>';
+  return s;
+}
+
+function renderModel(m){
+  var similar=MODELS.filter(function(x){return x.id!==m.id;}).slice(0,3);
+  document.title='Valtlens — '+m.name+' par '+m.developer;
+  var specsHTML='';
+  Object.keys(m.specs).forEach(function(k){
+    specsHTML+='<div class="spec-card"><div class="spec-label">'+k+'</div><div class="spec-val">'+m.specs[k]+'</div></div>';
+  });
+  var similarHTML=similar.map(function(s){
+    return '<a class="similar-card" href="/model/?id='+s.id+'">'+'<div class="similar-name">'+s.name+'</div>'+'<div class="similar-dev">by '+s.developer+'</div>'+'<div style="display:flex;gap:2px;margin-top:.5rem">'+'<span style="color:#eab308;font-size:.9rem">★</span>'+'<span style="font-size:.8125rem;color:var(--fg2)">'+s.rating+'</span>'+'</div></a>';
+  }).join('');
+  var reviewsHTML=REVIEWS.map(function(r){
+    return '<div class="review-card">'+'<div class="review-header">'+'<div><div class="reviewer">'+r.author+'</div><div style="display:flex;gap:2px;margin-top:.2rem">'+stars(r.rating)+'</div></div>'+'<span class="review-date">'+r.date+'</span>'+'</div>'+'<div class="review-text">'+r.text+'</div></div>';
+  }).join('');
+
+  document.getElementById('pageWrap').innerHTML=
+    '<a class="back-link" href="/">'+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>'+'Retour aux modèles</a>'+
+    '<div class="model-hero">'+
+      '<div>'+
+        '<div class="model-badge-row">'+
+          '<span class="badge-cat '+(m.free?'badge-free':'badge-paid')+'">'+(m.free?'✓ Gratuit':'Premium')+'</span>'+
+          '<div class="stars">'+stars(Math.round(m.rating))+'</div>'+
+          '<span style="font-size:.875rem;color:var(--fg2);font-weight:600">'+m.rating+' / 5</span>'+
+        '</div>'+
+        '<h1 class="model-name">'+m.name+'</h1>'+
+        '<div class="model-dev">par '+m.developer+'</div>'+
+        '<p class="model-desc">'+m.description+'</p>'+
+        '<div class="model-stats">'+
+          '<div class="stat"><span class="stat-val">'+m.specs[Object.keys(m.specs)[0]]+'</span><span class="stat-label">'+Object.keys(m.specs)[0]+'</span></div>'+
+          '<div class="stat"><span class="stat-val">'+m.specs[Object.keys(m.specs)[1]]+'</span><span class="stat-label">'+Object.keys(m.specs)[1]+'</span></div>'+
+          '<div class="stat"><span class="stat-val">'+m.rating+'★</span><span class="stat-label">Note</span></div>'+
+        '</div>'+
+        '<div class="model-actions">'+
+          '<a class="btn-primary" href="'+m.url+'" target="_blank" rel="noopener">Tester maintenant<svg viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></svg></a>'+
+          '<button class="btn-secondary" onclick="showToast(\'Lien copié !\');navigator.clipboard&&navigator.clipboard.writeText(window.location.href)">Partager</button>'+
+        '</div>'+
+      '</div>'+
+      '<div class="model-visual">'+
+        '<div class="model-visual-bg" style="background:'+m.colorBg+'"></div>'+
+        '<div class="model-visual-icon" style="background:linear-gradient(135deg,'+m.icon+','+m.icon+'aa);box-shadow:0 16px 48px '+m.icon+'66">'+
+          '<svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+
+    '<div class="tabs">'+
+      '<button class="tab-btn active" onclick="switchTab(this,\'overview\')">Aperçu</button>'+
+      '<button class="tab-btn" onclick="switchTab(this,\'specs\')">Spécifications</button>'+
+      '<button class="tab-btn" onclick="switchTab(this,\'reviews\')">Avis ('+REVIEWS.length+')</button>'+
+      '<button class="tab-btn" onclick="switchTab(this,\'similar\')">Similaires</button>'+
+    '</div>'+
+
+    '<div id="tab-overview" class="tab-content active">'+
+      '<div class="section-h2">Tags</div>'+
+      '<div class="tags-row">'+m.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('')+'</div>'+
+      '<div class="section-h2">À propos</div>'+
+      '<p style="color:var(--fg2);line-height:1.8;font-size:.9375rem">'+m.description+'</p>'+
+    '</div>'+
+
+    '<div id="tab-specs" class="tab-content">'+
+      '<div class="specs-grid">'+specsHTML+'</div>'+
+    '</div>'+
+
+    '<div id="tab-reviews" class="tab-content">'+
+      reviewsHTML+
+      '<button class="btn-secondary" onclick="showToast(\'Connexion requise pour poster un avis !')" style="margin-top:1rem">Laisser un avis</button>'+
+    '</div>'+
+
+    '<div id="tab-similar" class="tab-content">'+
+      '<div class="similar-grid">'+similarHTML+'</div>'+
+    '</div>';
+}
+
+function renderNotFound(){
+  document.getElementById('pageWrap').innerHTML=
+    '<div class="not-found">'+
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>'+
+      '<h1 style="font-size:1.5rem;font-weight:700;margin-bottom:.75rem">Modèle introuvable</h1>'+
+      '<p style="color:var(--fg3);margin-bottom:2rem">Ce modèle n\'existe pas ou a été supprimé.</p>'+
+      '<a class="btn-primary" href="/">← Retour aux modèles</a>'+
+    '</div>';
+}
+
+function switchTab(btn, id){
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},3000);
+}
+
+// Init
+var id=getParam('id');
+var model=MODELS.find(function(m){return m.id===id;});
+if(model) renderModel(model);
+else renderNotFound();
+</script>
+</body>
+</html>
