@@ -484,8 +484,7 @@ loadMoreBtn.addEventListener('click', function() {
 function handleNewsletter() {
   var email = document.getElementById('emailInput').value.trim();
   if (!email || email.indexOf('@') === -1) { showToast('Entrez une adresse valide'); return; }
-  showToast('Merci ! Vous etes abonne(e).');
-  document.getElementById('emailInput').value = '';
+  window.location.href = '/newsletter/?status=confirmed&email=' + encodeURIComponent(email);
 }
 
 var toastTimer;
