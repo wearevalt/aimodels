@@ -244,8 +244,7 @@ document.getElementById('catFilters').addEventListener('click',function(e){
 function handleNL(){
   var em=document.getElementById('nlEmail').value.trim();
   if(!em||!em.includes('@')){showToast('Entrez une adresse valide');return;}
-  showToast('Abonné(e) avec succès !');
-  document.getElementById('nlEmail').value='';
+  window.location.href='/newsletter/?status=confirmed&email='+encodeURIComponent(em);
 }
 
 var toastTimer;
