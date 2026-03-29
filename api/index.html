@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — API</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07)}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-submit-nav{padding:.45rem 1.1rem;border-radius:10px;background:var(--vi3);border:1px solid rgba(139,92,246,.35);font-size:.8125rem;font-weight:600;color:#c4b5fd;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-submit-nav:hover{background:rgba(139,92,246,.25);color:#fff;border-color:rgba(139,92,246,.6)}
+.btn-submit-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.btn-login{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-login:hover{background:#e4e4e7}
+main{flex:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:3rem clamp(1rem,4vw,3rem) 2rem;margin-top:auto}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2rem;margin-bottom:2.5rem}
+.footer-logo p{font-size:.85rem;color:var(--fg3);margin-top:.75rem;line-height:1.7;max-width:220px}
+.footer-col h4{font-size:.8125rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1rem}
+.footer-col a{display:block;font-size:.875rem;color:var(--fg3);text-decoration:none;margin-bottom:.55rem;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.social-links{display:flex;gap:1rem}
+.social-links a{color:var(--fg3);transition:color .2s}
+.social-links a:hover{color:#fff}
+.social-links svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;display:block}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.page-wrap{max-width:860px;margin:0 auto;padding:110px clamp(1rem,4vw,3rem) 5rem;flex:1}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;color:var(--fg2);text-decoration:none;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:#fff}
+.back-link svg{width:16px;height:16px}
+.api-hero{padding:3rem 0 4rem;border-bottom:1px solid var(--border);margin-bottom:3rem}.api-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.875rem}.api-hero p{color:var(--fg2);max-width:560px;line-height:1.75;margin-bottom:2rem}.api-badge{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .875rem;border-radius:999px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);font-size:.75rem;font-weight:700;color:#34d399;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.25rem}.api-badge span{width:7px;height:7px;border-radius:50%;background:#34d399}.hero-actions{display:flex;gap:.875rem;flex-wrap:wrap}.btn-vi{padding:.75rem 1.75rem;border-radius:12px;background:var(--vi);color:#fff;font-size:.9rem;font-weight:700;border:none;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}.btn-vi:hover{background:var(--vi2)}.btn-outline{padding:.75rem 1.75rem;border-radius:12px;background:transparent;border:1px solid var(--border);color:var(--fg2);font-size:.9rem;font-weight:500;cursor:pointer;text-decoration:none;transition:all .2s}.btn-outline:hover{border-color:rgba(139,92,246,.4);color:#fff}.section-h2{font-size:1.125rem;font-weight:700;color:#fff;margin:3rem 0 1.25rem;padding-top:3rem;border-top:1px solid var(--border)}.section-h2:first-of-type{padding-top:0;border-top:none;margin-top:0}.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:3rem}.plan-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:1.75rem}.plan-card.featured{border-color:rgba(139,92,246,.4);background:linear-gradient(160deg,rgba(139,92,246,.08),var(--bg3))}.plan-name{font-size:.75rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.625rem}.plan-price{font-size:2rem;font-weight:700;color:#fff;margin-bottom:.25rem}.plan-price span{font-size:.875rem;font-weight:400;color:var(--fg3)}.plan-desc{font-size:.8375rem;color:var(--fg3);margin-bottom:1.25rem}.plan-features{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem}.plan-features li{font-size:.8375rem;color:var(--fg2);display:flex;align-items:center;gap:.5rem}.plan-features li::before{content:"✓";color:var(--vi);font-weight:700;flex-shrink:0}.plan-btn{width:100%;padding:.65rem;border-radius:10px;font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;display:block;text-decoration:none}.plan-btn-vi{background:var(--vi);color:#fff;border:none}.plan-btn-vi:hover{background:var(--vi2)}.plan-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--fg2)}.plan-btn-ghost:hover{border-color:rgba(139,92,246,.4);color:#fff}.endpoint-list{display:flex;flex-direction:column;gap:.875rem;margin-bottom:3rem}.endpoint{background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden}.endpoint-head{display:flex;align-items:center;gap:.875rem;padding:1rem 1.25rem;cursor:pointer}.method{padding:.25rem .625rem;border-radius:6px;font-size:.75rem;font-weight:700;font-family:monospace;flex-shrink:0}.get{background:rgba(16,185,129,.15);color:#34d399}.post{background:rgba(139,92,246,.15);color:#c4b5fd}.endpoint-path{font-family:monospace;font-size:.9rem;color:#fff}.endpoint-desc{font-size:.8125rem;color:var(--fg3);margin-left:auto}.code-block{background:#0d0d0f;border-top:1px solid var(--border);padding:1.25rem 1.5rem;font-family:monospace;font-size:.8125rem;color:#a5b4fc;line-height:1.7;overflow-x:auto;display:none}.endpoint.open .code-block{display:block}.endpoint.open .endpoint-head{border-bottom:1px solid var(--border)}.key-badge{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:1.5rem;margin-bottom:3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}.key-info h3{font-size:.9375rem;font-weight:600;color:#fff;margin-bottom:.3rem}.key-info p{font-size:.8125rem;color:var(--fg3)}.key-input{display:flex;align-items:center;gap:.625rem;background:var(--bg);border:1px solid var(--bg4);border-radius:10px;padding:.5rem .875rem;font-family:monospace;font-size:.8125rem;color:var(--fg3);cursor:pointer;transition:border-color .2s}.key-input:hover{border-color:var(--vi)}@media(max-width:720px){.plans-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1}}
+</style>
+</head>
+<body><nav>
+  <div class="nav-inner">
+    <a class="logo" href="/"><div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><span class="logo-name">Valtlens</span></a>
+    <div class="nav-links">
+      <a href="/#models">Modèles IA</a>
+      <a href="/blog/">Journal</a>
+      <a href="/api/" class="active">API</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-submit-nav" href="/submit/"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Soumettre une IA</a>
+      <a class="btn-login" href="/auth/">Connexion</a>
+    </div>
+  </div>
+</nav><main>
+<div class="page-wrap" style="max-width:920px">
+
+  <div class="api-hero">
+    <div class="api-badge"><span></span>v1.0 — Beta publique</div>
+    <h1>API Valtlens</h1>
+    <p>Intégrez le catalogue des modèles IA vidéo directement dans vos applications. Accédez à nos données en temps réel via une API REST simple et puissante.</p>
+    <div class="hero-actions">
+      <a class="btn-vi" href="/auth/">Obtenir une clé API <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+      <a class="btn-outline" href="#endpoints">Voir les endpoints</a>
+    </div>
+  </div>
+
+  <div class="section-h2">Plans & Tarifs</div>
+  <div class="plans-grid">
+    <div class="plan-card">
+      <div class="plan-name">Gratuit</div>
+      <div class="plan-price">$0<span>/mois</span></div>
+      <div class="plan-desc">Pour tester et les petits projets</div>
+      <ul class="plan-features">
+        <li>100 req/jour</li>
+        <li>Endpoints lecture seule</li>
+        <li>Données de base</li>
+        <li>Support communautaire</li>
+      </ul>
+      <a class="plan-btn plan-btn-ghost" href="/auth/">Commencer</a>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-name" style="color:var(--vi)">Pro</div>
+      <div class="plan-price">$19<span>/mois</span></div>
+      <div class="plan-desc">Pour les développeurs et startups</div>
+      <ul class="plan-features">
+        <li>10 000 req/jour</li>
+        <li>Tous les endpoints</li>
+        <li>Données complètes + specs</li>
+        <li>Webhooks</li>
+        <li>Support prioritaire</li>
+      </ul>
+      <a class="plan-btn plan-btn-vi" href="/auth/">Démarrer l'essai</a>
+    </div>
+    <div class="plan-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">Sur devis</div>
+      <div class="plan-desc">Pour les grandes organisations</div>
+      <ul class="plan-features">
+        <li>Requêtes illimitées</li>
+        <li>SLA garanti 99.9%</li>
+        <li>IP dédiée</li>
+        <li>Intégration personnalisée</li>
+        <li>Support dédié</li>
+      </ul>
+      <a class="plan-btn plan-btn-ghost" href="mailto:api@valtlens.com">Nous contacter</a>
+    </div>
+  </div>
+
+  <div class="section-h2">Clé API</div>
+  <div class="key-badge">
+    <div class="key-info">
+      <h3>Authentification Bearer Token</h3>
+      <p>Incluez votre clé dans l'header <code style="color:var(--vi)">Authorization</code> de chaque requête</p>
+    </div>
+    <div class="key-input" onclick="showToast('Connectez-vous pour générer une clé API')">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      vlns_••••••••••••••••••••••
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+    </div>
+  </div>
+
+  <div class="section-h2" id="endpoints">Endpoints</div>
+  <div class="endpoint-list">
+
+    <div class="endpoint" onclick="toggleEndpoint(this)">
+      <div class="endpoint-head">
+        <span class="method get">GET</span>
+        <span class="endpoint-path">/v1/models</span>
+        <span class="endpoint-desc">Liste tous les modèles</span>
+      </div>
+      <div class="code-block">
+<span style="color:#6ee7b7">// Requête</span>
+curl -X GET https://api.valtlens.com/v1/models \
+  -H "Authorization: Bearer vlns_votre_cle_api" \
+  -H "Content-Type: application/json"
+
+<span style="color:#6ee7b7">// Paramètres optionnels</span>
+?category=text-to-video   <span style="color:#71717a">// Filtrer par catégorie</span>
+?free=true                <span style="color:#71717a">// Modèles gratuits seulement</span>
+?limit=20&offset=0        <span style="color:#71717a">// Pagination</span>
+
+<span style="color:#6ee7b7">// Réponse</span>
+{
+  "data": [
+    {
+      "id": "sora",
+      "name": "Sora",
+      "developer": "OpenAI",
+      "rating": 4.9,
+      "categories": ["text-to-video"],
+      "free": false,
+      "url": "https://openai.com/sora"
+    }
+  ],
+  "total": 98,
+  "page": 1
+}</div>
+    </div>
+
+    <div class="endpoint" onclick="toggleEndpoint(this)">
+      <div class="endpoint-head">
+        <span class="method get">GET</span>
+        <span class="endpoint-path">/v1/models/:id</span>
+        <span class="endpoint-desc">Détail d'un modèle</span>
+      </div>
+      <div class="code-block">
+<span style="color:#6ee7b7">// Requête</span>
+curl -X GET https://api.valtlens.com/v1/models/sora \
+  -H "Authorization: Bearer vlns_votre_cle_api"
+
+<span style="color:#6ee7b7">// Réponse</span>
+{
+  "id": "sora",
+  "name": "Sora",
+  "developer": "OpenAI",
+  "description": "...",
+  "rating": 4.9,
+  "specs": {
+    "duration": "60s",
+    "resolution": "1080p",
+    "pricing": "ChatGPT Plus"
+  },
+  "tags": ["Text-to-Video", "High Quality"],
+  "updatedAt": "2025-03-29T00:00:00Z"
+}</div>
+    </div>
+
+    <div class="endpoint" onclick="toggleEndpoint(this)">
+      <div class="endpoint-head">
+        <span class="method get">GET</span>
+        <span class="endpoint-path">/v1/categories</span>
+        <span class="endpoint-desc">Liste des catégories</span>
+      </div>
+      <div class="code-block">
+<span style="color:#6ee7b7">// Réponse</span>
+{
+  "categories": [
+    {"id": "text-to-video", "label": "Text-to-Video", "count": 42},
+    {"id": "image-to-video", "label": "Image-to-Video", "count": 28},
+    {"id": "free", "label": "Gratuit / Open Source", "count": 35}
+  ]
+}</div>
+    </div>
+
+    <div class="endpoint" onclick="toggleEndpoint(this)">
+      <div class="endpoint-head">
+        <span class="method post">POST</span>
+        <span class="endpoint-path">/v1/search</span>
+        <span class="endpoint-desc">Recherche avancée</span>
+      </div>
+      <div class="code-block">
+<span style="color:#6ee7b7">// Requête</span>
+curl -X POST https://api.valtlens.com/v1/search \
+  -H "Authorization: Bearer vlns_votre_cle_api" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "avatar lip sync",
+    "filters": {
+      "free": false,
+      "minRating": 4.5
+    },
+    "limit": 10
+  }'
+
+<span style="color:#6ee7b7">// Réponse</span>
+{
+  "results": [...],
+  "total": 3,
+  "query": "avatar lip sync"
+}</div>
+    </div>
+
+  </div>
+
+  <div class="section-h2">Limites de taux</div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:3rem">
+    <table style="width:100%;border-collapse:collapse">
+      <thead><tr style="border-bottom:1px solid var(--border)">
+        <th style="padding:.875rem 1.25rem;text-align:left;font-size:.8125rem;color:var(--fg3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Plan</th>
+        <th style="padding:.875rem 1.25rem;text-align:left;font-size:.8125rem;color:var(--fg3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Req/jour</th>
+        <th style="padding:.875rem 1.25rem;text-align:left;font-size:.8125rem;color:var(--fg3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Req/min</th>
+        <th style="padding:.875rem 1.25rem;text-align:left;font-size:.8125rem;color:var(--fg3);font-weight:600;text-transform:uppercase;letter-spacing:.06em">Webhooks</th>
+      </tr></thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:.875rem 1.25rem;font-size:.875rem;color:#fff">Gratuit</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">100</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">10</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg3)">—</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:.875rem 1.25rem;font-size:.875rem;color:#fff">Pro</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">10 000</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">100</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:#34d399">✓</td></tr>
+        <tr><td style="padding:.875rem 1.25rem;font-size:.875rem;color:#fff">Enterprise</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">Illimité</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:var(--fg2)">Illimité</td><td style="padding:.875rem 1.25rem;font-size:.875rem;color:#34d399">✓</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</main>
+<script>
+function toggleEndpoint(el){el.classList.toggle('open');}
+</script><footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <a class="logo" href="/"><div class="logo-icon" style="width:30px;height:30px;border-radius:8px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg></div><span class="logo-name" style="font-size:1.1rem">Valtlens</span></a>
+      <p>L'annuaire premium des modèles IA vidéo. Créé par des passionnés, pour des créateurs.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Produit</h4>
+      <a href="/#models">Modèles</a>
+      <a href="/api/">API</a>
+      <a href="/submit/">Soumettre une IA</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ressources</h4>
+      <a href="/blog/">Journal</a>
+      <a href="/community/">Communauté</a>
+      <a href="/support/">Support</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a href="/legal/privacy/">Confidentialité</a>
+      <a href="/legal/terms/">CGU</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="social-links">
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S9.06 17.32 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+<script>
+var _tt;
+function showToast(m){{var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){{t.classList.remove('show');}},3000);}}
+</script></body>
+</html>
