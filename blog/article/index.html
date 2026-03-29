@@ -297,8 +297,7 @@ function copyLink(){
 function handleSideNL(){
   var em=document.getElementById('sideNL').value.trim();
   if(!em||!em.includes('@')){showToast('Email invalide');return;}
-  showToast('Abonné(e) !');
-  document.getElementById('sideNL').value='';
+  window.location.href='/newsletter/?status=confirmed&email='+encodeURIComponent(em);
 }
 
 var toastTimer;
