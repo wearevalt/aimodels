@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — Support</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07)}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6;min-height:100vh;display:flex;flex-direction:column}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:#fff}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-submit-nav{padding:.45rem 1.1rem;border-radius:10px;background:var(--vi3);border:1px solid rgba(139,92,246,.35);font-size:.8125rem;font-weight:600;color:#c4b5fd;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem}
+.btn-submit-nav:hover{background:rgba(139,92,246,.25);color:#fff;border-color:rgba(139,92,246,.6)}
+.btn-submit-nav svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0}
+.btn-login{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-login:hover{background:#e4e4e7}
+main{flex:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:3rem clamp(1rem,4vw,3rem) 2rem;margin-top:auto}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:2rem;margin-bottom:2.5rem}
+.footer-logo p{font-size:.85rem;color:var(--fg3);margin-top:.75rem;line-height:1.7;max-width:220px}
+.footer-col h4{font-size:.8125rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:1rem}
+.footer-col a{display:block;font-size:.875rem;color:var(--fg3);text-decoration:none;margin-bottom:.55rem;transition:color .2s;cursor:pointer}
+.footer-col a:hover{color:#fff}
+.footer-bottom{max-width:1200px;margin:0 auto;border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.social-links{display:flex;gap:1rem}
+.social-links a{color:var(--fg3);transition:color .2s}
+.social-links a:hover{color:#fff}
+.social-links svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;display:block}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+.page-wrap{max-width:860px;margin:0 auto;padding:110px clamp(1rem,4vw,3rem) 5rem;flex:1}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;color:var(--fg2);text-decoration:none;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:#fff}
+.back-link svg{width:16px;height:16px}
+.support-hero{text-align:center;padding:3rem 0 4rem}.support-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:700;letter-spacing:-.02em;margin-bottom:.875rem}.support-hero p{color:var(--fg2);max-width:480px;margin:0 auto 2rem}.search-support{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:.75rem;background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:.75rem 1.25rem}.search-support input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-family:inherit;font-size:.9375rem}.search-support input::placeholder{color:var(--fg3)}.search-support svg{width:18px;height:18px;stroke:var(--fg3);flex-shrink:0}.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:4rem}.faq-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:1.5rem;cursor:pointer;transition:all .25s}.faq-card:hover{border-color:rgba(139,92,246,.3);transform:translateY(-2px)}.faq-cat{font-size:.75rem;font-weight:700;color:var(--vi);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.625rem}.faq-card h3{font-size:.9375rem;font-weight:600;color:#fff;margin-bottom:.5rem;line-height:1.4}.faq-card p{font-size:.8375rem;color:var(--fg3);line-height:1.6}.contact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-bottom:4rem}.contact-card{background:var(--bg3);border:1px solid var(--border);border-radius:18px;padding:1.5rem;text-align:center;transition:all .25s;text-decoration:none;display:block}.contact-card:hover{border-color:rgba(139,92,246,.3)}.contact-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .875rem}.contact-card h3{font-size:.9375rem;font-weight:700;color:#fff;margin-bottom:.4rem}.contact-card p{font-size:.8125rem;color:var(--fg3)}.section-h2{font-size:1.125rem;font-weight:700;color:#fff;margin-bottom:1.5rem}.accordion-item{border-bottom:1px solid var(--border)}.accordion-q{display:flex;justify-content:space-between;align-items:center;padding:1.125rem 0;cursor:pointer;font-size:.9375rem;font-weight:600;color:#fff;gap:1rem}.accordion-q svg{width:18px;height:18px;flex-shrink:0;stroke:var(--fg3);transition:transform .25s}.accordion-item.open .accordion-q svg{transform:rotate(180deg)}.accordion-a{display:none;padding-bottom:1.25rem;color:var(--fg2);font-size:.9rem;line-height:1.75}.accordion-item.open .accordion-a{display:block}@media(max-width:640px){.faq-grid,.contact-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.nav-links{display:none}.footer-grid{grid-template-columns:1fr 1fr}.footer-logo{grid-column:1/-1}}
+</style>
+</head>
+<body><nav>
+  <div class="nav-inner">
+    <a class="logo" href="/"><div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div><span class="logo-name">Valtlens</span></a>
+    <div class="nav-links">
+      <a href="/#models">Modèles IA</a>
+      <a href="/blog/">Journal</a>
+      <a href="/api/" >API</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-submit-nav" href="/submit/"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Soumettre une IA</a>
+      <a class="btn-login" href="/auth/">Connexion</a>
+    </div>
+  </div>
+</nav><main>
+<div class="page-wrap" style="max-width:900px">
+  <div class="support-hero">
+    <h1>Comment pouvons-nous vous aider ?</h1>
+    <p>Trouvez rapidement une réponse à votre question ou contactez notre équipe.</p>
+    <div class="search-support">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" placeholder="Rechercher dans le support..." id="supportSearch">
+    </div>
+  </div>
+
+  <div class="section-h2">Contacter l'équipe</div>
+  <div class="contact-grid">
+    <a class="contact-card" href="mailto:hello@valtlens.com">
+      <div class="contact-icon" style="background:rgba(139,92,246,.15)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c4b5fd" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <h3>Email</h3>
+      <p>hello@valtlens.com<br>Réponse sous 24h</p>
+    </a>
+    <a class="contact-card" href="/community/">
+      <div class="contact-icon" style="background:rgba(6,182,212,.15)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#67e8f9" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Communauté</h3>
+      <p>Forum d'entraide<br>Réponses de la communauté</p>
+    </a>
+    <a class="contact-card" href="https://twitter.com/valtlens" target="_blank">
+      <div class="contact-icon" style="background:rgba(29,161,242,.15)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+      </div>
+      <h3>Twitter / X</h3>
+      <p>@valtlens<br>Pour les questions rapides</p>
+    </a>
+  </div>
+
+  <div class="section-h2">Questions fréquentes</div>
+  <div id="faqList">
+    <div class="accordion-item open">
+      <div class="accordion-q" onclick="toggleFaq(this)">Comment soumettre un modèle IA ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">Rendez-vous sur la page <a href="/submit/" style="color:var(--vi)">Soumettre une IA</a>. Remplissez le formulaire avec le nom, l'URL officielle et une description du modèle. Notre équipe valide chaque soumission sous 48h.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-q" onclick="toggleFaq(this)">Comment créer un compte ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">Cliquez sur "Connexion" en haut à droite, puis sur "Créer un compte". Vous pouvez vous inscrire avec votre email ou via Google/GitHub.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-q" onclick="toggleFaq(this)">Comment accéder à l'API Valtlens ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">L'API est disponible sur la page <a href="/api/" style="color:var(--vi)">API</a>. Créez un compte, générez une clé API dans vos paramètres, et consultez la documentation pour démarrer.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-q" onclick="toggleFaq(this)">Comment me désabonner de la newsletter ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">Cliquez sur le lien "Se désabonner" en bas de chaque email que nous vous envoyons. Votre désabonnement est effectif immédiatement.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-q" onclick="toggleFaq(this)">Un modèle que j'ai soumis n'est pas encore visible, pourquoi ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">Chaque soumission est vérifiée manuellement par notre équipe. Le délai est de 24 à 48h. Si votre soumission n'apparaît pas après 48h, contactez-nous à support@valtlens.com.</div>
+    </div>
+    <div class="accordion-item">
+      <div class="accordion-q" onclick="toggleFaq(this)">Comment signaler une information incorrecte ?<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></div>
+      <div class="accordion-a">Envoyez-nous un email à hello@valtlens.com en précisant le nom du modèle et l'information incorrecte. Nous ferons la correction dans les 24h.</div>
+    </div>
+  </div>
+</div>
+</main>
+<script>
+function toggleFaq(el){var item=el.parentElement;item.classList.toggle('open');}
+document.getElementById('supportSearch').addEventListener('input',function(){
+  var q=this.value.toLowerCase();
+  document.querySelectorAll('.accordion-item').forEach(function(item){
+    var text=item.textContent.toLowerCase();
+    item.style.display=!q||text.includes(q)?'block':'none';
+  });
+});
+</script><footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <a class="logo" href="/"><div class="logo-icon" style="width:30px;height:30px;border-radius:8px"><svg viewBox="0 0 24 24" style="width:15px;height:15px" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg></div><span class="logo-name" style="font-size:1.1rem">Valtlens</span></a>
+      <p>L'annuaire premium des modèles IA vidéo. Créé par des passionnés, pour des créateurs.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Produit</h4>
+      <a href="/#models">Modèles</a>
+      <a href="/api/">API</a>
+      <a href="/submit/">Soumettre une IA</a>
+    </div>
+    <div class="footer-col">
+      <h4>Ressources</h4>
+      <a href="/blog/">Journal</a>
+      <a href="/community/">Communauté</a>
+      <a href="/support/">Support</a>
+    </div>
+    <div class="footer-col">
+      <h4>Légal</h4>
+      <a href="/legal/privacy/">Confidentialité</a>
+      <a href="/legal/terms/">CGU</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="social-links">
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
+      <a href="#"><svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.2c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65S9.06 17.32 9 18v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+    </div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+<script>
+var _tt;
+function showToast(m){{var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(_tt);_tt=setTimeout(function(){{t.classList.remove('show');}},3000);}}
+</script></body>
+</html>
