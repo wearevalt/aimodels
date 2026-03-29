@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr" style="scroll-behavior:smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valtlens — Soumettre une IA</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#09090b;--bg2:#111113;--bg3:#18181b;--bg4:#27272a;--fg:#fafafa;--fg2:#a1a1aa;--fg3:#71717a;--vi:#8b5cf6;--vi2:#7c3aed;--vi3:rgba(139,92,246,.15);--in:#6366f1;--border:rgba(255,255,255,.07);--err:#f43f5e;--ok:#10b981}
+body{background:var(--bg);color:var(--fg);font-family:'DM Sans',sans-serif;overflow-x:hidden;line-height:1.6}
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 clamp(1rem,4vw,3rem)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--vi),var(--in));display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-icon svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.logo-name{font-family:'Instrument Serif',serif;font-size:1.4rem;color:#fff;font-style:italic}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:.875rem;font-weight:500;color:var(--fg2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-links a.active{color:#fff}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-ghost{padding:.45rem 1rem;border-radius:999px;border:1px solid var(--bg4);font-size:.8125rem;font-weight:500;color:var(--fg2);background:transparent;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-ghost:hover{border-color:var(--vi);color:#fff;background:var(--vi3)}
+.btn-cta-nav{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center}
+.btn-cta-nav:hover{background:#e4e4e7}
+/* PAGE */
+.page-wrap{max-width:780px;margin:0 auto;padding:110px clamp(1rem,4vw,3rem) 5rem}
+.back-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.875rem;color:var(--fg2);text-decoration:none;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:#fff}
+.back-link svg{width:16px;height:16px}
+/* HEADER */
+.page-header{margin-bottom:3rem;text-align:center}
+.page-eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .875rem;border-radius:999px;background:var(--vi3);border:1px solid rgba(139,92,246,.3);font-size:.75rem;font-weight:600;color:#c4b5fd;text-transform:uppercase;letter-spacing:.07em;margin-bottom:1.25rem}
+.page-title{font-size:clamp(1.75rem,4vw,2.75rem);font-weight:700;line-height:1.2;letter-spacing:-.02em;margin-bottom:.75rem}
+.page-sub{font-size:1rem;color:var(--fg2);max-width:520px;margin:0 auto}
+/* FORM */
+.form-card{background:var(--bg3);border:1px solid var(--border);border-radius:24px;padding:2.5rem;margin-bottom:2rem}
+.form-section-title{font-size:.8125rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.field{margin-bottom:1.5rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{display:block;font-size:.875rem;font-weight:500;color:var(--fg2);margin-bottom:.5rem}
+label span.req{color:var(--vi);margin-left:.2rem}
+input[type=text],input[type=url],input[type=email],select,textarea{width:100%;padding:.75rem 1rem;background:var(--bg);border:1px solid var(--bg4);border-radius:12px;color:#fff;font-family:inherit;font-size:.9rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+input[type=text]:focus,input[type=url]:focus,input[type=email]:focus,select:focus,textarea:focus{border-color:var(--vi);box-shadow:0 0 0 3px rgba(139,92,246,.12)}
+input::placeholder,textarea::placeholder{color:var(--fg3)}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:2.5rem}
+select option{background:var(--bg3)}
+textarea{resize:vertical;min-height:120px;line-height:1.6}
+.field-hint{font-size:.75rem;color:var(--fg3);margin-top:.4rem}
+.field-error{font-size:.75rem;color:var(--err);margin-top:.4rem;display:none}
+.field.invalid input,.field.invalid select,.field.invalid textarea{border-color:var(--err)}
+.field.invalid .field-error{display:block}
+/* CHECKBOXES */
+.check-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.625rem}
+.check-item{display:flex;align-items:center;gap:.625rem;padding:.625rem .875rem;border-radius:10px;border:1px solid var(--border);cursor:pointer;transition:all .2s;background:var(--bg)}
+.check-item:hover{border-color:rgba(139,92,246,.3);background:var(--vi3)}
+.check-item input[type=checkbox]{width:16px;height:16px;accent-color:var(--vi);flex-shrink:0}
+.check-item label{font-size:.8125rem;color:var(--fg2);cursor:pointer;margin:0}
+/* PREVIEW */
+.preview-card{background:linear-gradient(160deg,#18181b,#111113);border:1px solid var(--border);border-radius:20px;padding:1.5rem;margin-top:2rem;display:none}
+.preview-card.visible{display:block}
+.preview-label{font-size:.75rem;font-weight:700;color:var(--fg3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem}
+.preview-name{font-size:1.25rem;font-weight:700;color:#fff}
+.preview-dev{font-size:.875rem;color:var(--fg3);margin-top:.2rem}
+/* SUBMIT BTN */
+.submit-row{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.btn-submit{padding:.875rem 2.5rem;border-radius:14px;background:var(--vi);color:#fff;font-size:1rem;font-weight:700;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
+.btn-submit:hover{background:var(--vi2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.35)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.btn-submit svg{width:18px;height:18px;flex-shrink:0}
+.terms-note{font-size:.8125rem;color:var(--fg3)}
+.terms-note a{color:var(--fg2);text-decoration:underline}
+/* SUCCESS */
+.success-screen{text-align:center;padding:3rem 2rem;display:none}
+.success-screen.show{display:block}
+.success-icon{width:72px;height:72px;border-radius:50%;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.success-icon svg{width:36px;height:36px;stroke:#34d399;fill:none;stroke-width:2;stroke-linecap:round}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#18181b;border:1px solid rgba(139,92,246,.4);color:#fff;padding:.875rem 1.5rem;border-radius:12px;font-size:.875rem;z-index:9999;transform:translateY(100px);opacity:0;transition:all .35s;box-shadow:0 20px 40px rgba(0,0,0,.5);max-width:320px}
+.toast.show{transform:translateY(0);opacity:1}
+footer{border-top:1px solid var(--border);background:#050506;padding:2rem clamp(1rem,4vw,3rem)}
+.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.footer-bottom p{font-size:.8125rem;color:var(--fg3)}
+.footer-nav{display:flex;gap:1.5rem}
+.footer-nav a{font-size:.8125rem;color:var(--fg3);text-decoration:none;transition:color .2s}
+.footer-nav a:hover{color:#fff}
+@media(max-width:600px){.field-row{grid-template-columns:1fr}.nav-links{display:none}.submit-row{flex-direction:column;align-items:stretch}.btn-submit{justify-content:center}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="/">
+      <div class="logo-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg></div>
+      <span class="logo-name">Valtlens</span>
+    </a>
+    <div class="nav-links">
+      <a href="/#models">Modèles IA</a>
+      <a href="/blog/">Journal</a>
+      <a href="/#newsletter">Newsletter</a>
+    </div>
+    <div class="nav-actions">
+      <a class="btn-ghost" href="/submit/" style="border-color:var(--vi);color:#c4b5fd">Soumettre</a>
+      <a class="btn-cta-nav" href="/auth/">Se connecter</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <a class="back-link" href="/">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour aux modèles
+  </a>
+
+  <div class="page-header">
+    <div class="page-eyebrow">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      Soumission
+    </div>
+    <h1 class="page-title">Soumettre une IA Vidéo</h1>
+    <p class="page-sub">Tu as trouvé un modèle IA vidéo qui mérite d'être dans l'annuaire ? Soumets-le ici, notre équipe le validera sous 48h.</p>
+  </div>
+
+  <!-- FORM -->
+  <div id="formWrap">
+    <div class="form-card">
+      <div class="form-section-title">Informations de base</div>
+
+      <div class="field-row">
+        <div class="field" id="f-name">
+          <label>Nom du modèle <span class="req">*</span></label>
+          <input type="text" id="name" placeholder="ex: Runway Gen-4" maxlength="80">
+          <div class="field-error">Ce champ est requis</div>
+        </div>
+        <div class="field" id="f-dev">
+          <label>Développeur / Entreprise <span class="req">*</span></label>
+          <input type="text" id="dev" placeholder="ex: Runway ML" maxlength="80">
+          <div class="field-error">Ce champ est requis</div>
+        </div>
+      </div>
+
+      <div class="field" id="f-url">
+        <label>URL officielle <span class="req">*</span></label>
+        <input type="url" id="url" placeholder="https://...">
+        <div class="field-hint">Le lien vers la page officielle du modèle</div>
+        <div class="field-error">URL invalide</div>
+      </div>
+
+      <div class="field" id="f-desc">
+        <label>Description <span class="req">*</span></label>
+        <textarea id="desc" placeholder="Décris les capacités et points forts de ce modèle IA..."></textarea>
+        <div class="field-hint">Entre 100 et 500 caractères. Sois précis et factuel.</div>
+        <div class="field-error">Minimum 50 caractères requis</div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-section-title">Catégories</div>
+
+      <div class="field">
+        <label>Type de génération <span class="req">*</span></label>
+        <div class="check-grid" id="catGrid">
+          <div class="check-item">
+            <input type="checkbox" id="c1" value="text-to-video">
+            <label for="c1">Text-to-Video</label>
+          </div>
+          <div class="check-item">
+            <input type="checkbox" id="c2" value="image-to-video">
+            <label for="c2">Image-to-Video</label>
+          </div>
+          <div class="check-item">
+            <input type="checkbox" id="c3" value="video-to-video">
+            <label for="c3">Video-to-Video</label>
+          </div>
+          <div class="check-item">
+            <input type="checkbox" id="c4" value="avatar">
+            <label for="c4">Avatar IA</label>
+          </div>
+          <div class="check-item">
+            <input type="checkbox" id="c5" value="free">
+            <label for="c5">Gratuit / Open Source</label>
+          </div>
+          <div class="check-item">
+            <input type="checkbox" id="c6" value="enterprise">
+            <label for="c6">Enterprise</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Prix</label>
+          <select id="pricing">
+            <option value="">Sélectionner...</option>
+            <option value="free">100% Gratuit</option>
+            <option value="freemium">Freemium</option>
+            <option value="paid">Payant</option>
+            <option value="enterprise">Enterprise (sur devis)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Résolution max</label>
+          <select id="resolution">
+            <option value="">Sélectionner...</option>
+            <option value="720p">720p</option>
+            <option value="1080p">1080p</option>
+            <option value="4K">4K</option>
+            <option value="variable">Variable</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-section-title">Tes informations</div>
+
+      <div class="field-row">
+        <div class="field" id="f-email">
+          <label>Ton email <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="toi@example.com">
+          <div class="field-hint">Pour te notifier quand la soumission est validée</div>
+          <div class="field-error">Email invalide</div>
+        </div>
+        <div class="field">
+          <label>Lien à mettre en avant (optionnel)</label>
+          <input type="url" id="submitterUrl" placeholder="ton-site.com">
+          <div class="field-hint">Ton site, Twitter, LinkedIn...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-card" id="previewCard">
+      <div class="preview-label">Aperçu de ta soumission</div>
+      <div class="preview-name" id="prevName">—</div>
+      <div class="preview-dev" id="prevDev">—</div>
+      <div id="prevDesc" style="font-size:.875rem;color:var(--fg2);margin-top:.75rem;line-height:1.7">—</div>
+    </div>
+
+    <div class="submit-row" style="margin-top:2rem">
+      <div class="terms-note">En soumettant, tu acceptes nos <a href="#">conditions d'utilisation</a>.<br>Notre équipe valide chaque soumission sous 48h.</div>
+      <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+        Soumettre
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2 style="font-size:1.75rem;font-weight:700;margin-bottom:.75rem">Soumission envoyée !</h2>
+    <p style="color:var(--fg2);max-width:400px;margin:0 auto 2rem;line-height:1.7">Merci ! Notre équipe va examiner ta soumission dans les 48 prochaines heures. Tu recevras une notification par email.</p>
+    <a href="/" style="display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:14px;background:#fff;color:#000;font-weight:700;text-decoration:none;transition:all .2s">← Retour à l'annuaire</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-bottom">
+    <p>© 2025 Valtlens. Tous droits réservés.</p>
+    <div class="footer-nav">
+      <a href="/">Accueil</a>
+      <a href="/blog/">Journal</a>
+      <a href="/submit/">Soumettre</a>
+      <a href="/auth/">Connexion</a>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Live preview
+['name','dev','desc'].forEach(function(id){
+  var el=document.getElementById(id);
+  if(el) el.addEventListener('input', updatePreview);
+});
+
+function updatePreview(){
+  var n=document.getElementById('name').value.trim();
+  var d=document.getElementById('dev').value.trim();
+  var desc=document.getElementById('desc').value.trim();
+  var card=document.getElementById('previewCard');
+  if(n||d||desc){
+    card.classList.add('visible');
+    document.getElementById('prevName').textContent=n||'Nom du modèle';
+    document.getElementById('prevDev').textContent=d?'par '+d:'Développeur';
+    document.getElementById('prevDesc').textContent=desc||'Description du modèle...';
+  }else{
+    card.classList.remove('visible');
+  }
+}
+
+function validate(){
+  var ok=true;
+  // name
+  var n=document.getElementById('name').value.trim();
+  var fn=document.getElementById('f-name');
+  if(!n){fn.classList.add('invalid');ok=false;}else{fn.classList.remove('invalid');}
+  // dev
+  var d=document.getElementById('dev').value.trim();
+  var fd=document.getElementById('f-dev');
+  if(!d){fd.classList.add('invalid');ok=false;}else{fd.classList.remove('invalid');}
+  // url
+  var u=document.getElementById('url').value.trim();
+  var fu=document.getElementById('f-url');
+  if(!u||!u.startsWith('http')){fu.classList.add('invalid');ok=false;}else{fu.classList.remove('invalid');}
+  // desc
+  var desc=document.getElementById('desc').value.trim();
+  var fdesc=document.getElementById('f-desc');
+  if(desc.length<50){fdesc.classList.add('invalid');ok=false;}else{fdesc.classList.remove('invalid');}
+  // email
+  var em=document.getElementById('email').value.trim();
+  var fem=document.getElementById('f-email');
+  if(!em||!em.includes('@')){fem.classList.add('invalid');ok=false;}else{fem.classList.remove('invalid');}
+  return ok;
+}
+
+function handleSubmit(){
+  if(!validate()){
+    showToast('Remplis tous les champs requis');
+    return;
+  }
+  var btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  btn.textContent='Envoi en cours...';
+  // Simulate async
+  setTimeout(function(){
+    document.getElementById('formWrap').style.display='none';
+    document.getElementById('successScreen').classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }, 1200);
+}
+
+var toastTimer;
+function showToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(function(){t.classList.remove('show');},3000);
+}
+</script>
+</body>
+</html>
