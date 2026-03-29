@@ -32,6 +32,8 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(9,9,11,.85);back
 .btn-outline:hover{border-color:var(--vi);color:#fff;background:var(--vi3)}
 .btn-cta{padding:.55rem 1.3rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s}
 .btn-cta:hover{background:#e4e4e7;transform:translateY(-1px)}
+.btn-login{padding:.5rem 1.25rem;border-radius:999px;background:#fff;color:#000;font-size:.8125rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-login:hover{background:#e4e4e7}
 
 /* HERO */
 .hero-section{position:relative;overflow:hidden}
@@ -183,8 +185,8 @@ footer{border-top:1px solid var(--border);background:#050506;padding:3.5rem clam
       <a href="#newsletter">Newsletter</a>
     </div>
     <div class="nav-actions">
-      <button class="btn-outline" onclick="showToast('⭐ Merci pour votre support !')">★ Star</button>
-      <a class="btn-cta" href="/submit/">Soumettre une IA</a>
+
+      <a class="btn-submit-nav" href="/submit/"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;flex-shrink:0"><path d="M12 5v14M5 12l7 7 7-7"/></svg>Soumettre une IA</a>
     </div>
   </div>
 </nav>
@@ -331,19 +333,19 @@ footer{border-top:1px solid var(--border);background:#050506;padding:3.5rem clam
       <div class="footer-col">
         <h4>Produit</h4>
         <a href="#models">Modèles</a>
-        <a onclick="showToast('API bientôt disponible !')">API</a>
+        <a href="/api/">API</a>
         <a onclick="showToast('🚀 Formulaire bientôt !')">Soumettre une IA</a>
       </div>
       <div class="footer-col">
         <h4>Ressources</h4>
         <a href="#journal">Le Journal</a>
-        <a onclick="showToast('Communauté bientôt !')">Communauté</a>
-        <a onclick="showToast('Support bientôt !')">Support</a>
+        <a href="/community/">Communauté</a>
+        <a href="/support/">Support</a>
       </div>
       <div class="footer-col">
         <h4>Légal</h4>
-        <a onclick="showToast('Page en construction')">Confidentialité</a>
-        <a onclick="showToast('Page en construction')">CGU</a>
+        <a href="/legal/privacy/">Confidentialité</a>
+        <a href="/legal/terms/">CGU</a>
       </div>
     </div>
     <div class="footer-bottom">
