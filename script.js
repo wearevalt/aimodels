@@ -1,416 +1,147 @@
-// AI Video Generation Models Data
-const modelsData = [
-    {
-        id: 1,
-        name: "Sora",
-        developer: "OpenAI",
-        description: "Revolutionary text-to-video model capable of generating highly realistic and imaginative scenes from text instructions. Known for its exceptional quality and coherence.",
-        maxDuration: "60 seconds",
-        resolution: "1080p",
-        pricing: "Subscription",
-        bestFor: "Creative storytelling",
-        rating: 4.9,
-        tags: ["Text-to-Video", "High Quality", "60s Videos"],
-        categories: ["text-to-video", "api"],
-        url: "https://openai.com/sora"
-    },
-    {
-        id: 2,
-        name: "Runway Gen-3",
-        developer: "Runway",
-        description: "Industry-leading video generation platform with advanced motion control, style transfer, and professional-grade output quality for creative professionals.",
-        maxDuration: "40 seconds",
-        resolution: "4K",
-        pricing: "Credits-based",
-        bestFor: "Professional production",
-        rating: 4.8,
-        tags: ["Professional", "Motion Control", "API Access"],
-        categories: ["text-to-video", "image-to-video", "api"],
-        url: "https://runwayml.com"
-    },
-    {
-        id: 3,
-        name: "Pika",
-        developer: "Pika Labs",
-        description: "User-friendly AI video generator with impressive quality and fast generation times. Great balance of features and accessibility for creators.",
-        maxDuration: "30 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Quick prototyping",
-        rating: 4.7,
-        tags: ["User-Friendly", "Fast Generation", "Affordable"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://pika.art"
-    },
-    {
-        id: 4,
-        name: "Kling",
-        developer: "Kuaishou",
-        description: "Powerful video generation model with impressive motion dynamics and long-form video capabilities. Excellent for creating engaging social media content.",
-        maxDuration: "2 minutes",
-        resolution: "1080p",
-        pricing: "Free/Premium",
-        bestFor: "Long-form content",
-        rating: 4.6,
-        tags: ["Long Duration", "Motion Dynamics", "Social Media"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://kling.kuaishou.com"
-    },
-    {
-        id: 5,
-        name: "Stable Video Diffusion",
-        developer: "Stability AI",
-        description: "Open-source video generation model that can be run locally. Perfect for developers and researchers who want full control over the generation process.",
-        maxDuration: "4 seconds",
-        resolution: "1024x576",
-        pricing: "Open Source",
-        bestFor: "Developers/Researchers",
-        rating: 4.5,
-        tags: ["Open Source", "Local Deployment", "Customizable"],
-        categories: ["text-to-video", "image-to-video", "free", "api"],
-        url: "https://stability.ai"
-    },
-    {
-        id: 6,
-        name: "Gen-2",
-        developer: "Runway",
-        description: "Versatile video generation model supporting text-to-video, image-to-video, and video-to-video transformations. Great for creative experimentation.",
-        maxDuration: "16 seconds",
-        resolution: "4K",
-        pricing: "Credits-based",
-        bestFor: "Versatile creation",
-        rating: 4.6,
-        tags: ["Versatile", "Multiple Modes", "High Resolution"],
-        categories: ["text-to-video", "image-to-video", "api"],
-        url: "https://runwayml.com"
-    },
-    {
-        id: 7,
-        name: "HeyGen",
-        developer: "HeyGen",
-        description: "Specialized in creating AI avatar videos with realistic lip-syncing and natural gestures. Ideal for marketing, training, and personalized content.",
-        maxDuration: "5 minutes",
-        resolution: "1080p",
-        pricing: "Subscription",
-        bestFor: "Avatar videos",
-        rating: 4.7,
-        tags: ["AI Avatars", "Lip-Sync", "Personalization"],
-        categories: ["text-to-video", "api"],
-        url: "https://heygen.com"
-    },
-    {
-        id: 8,
-        name: "Synthesia",
-        developer: "Synthesia",
-        description: "Enterprise-focused AI video generation platform for creating professional training and corporate videos with AI presenters in multiple languages.",
-        maxDuration: "10 minutes",
-        resolution: "1080p",
-        pricing: "Subscription",
-        bestFor: "Corporate training",
-        rating: 4.5,
-        tags: ["Enterprise", "Multi-Language", "AI Presenters"],
-        categories: ["text-to-video", "api"],
-        url: "https://synthesia.io"
-    },
-    {
-        id: 9,
-        name: "Luma Dream Machine",
-        developer: "Luma AI",
-        description: "Fast and efficient video generation model with excellent quality. Great for quick iterations and creative exploration with minimal wait times.",
-        maxDuration: "10 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Quick iterations",
-        rating: 4.4,
-        tags: ["Fast Generation", "High Quality", "Easy to Use"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://lumalabs.ai"
-    },
-    {
-        id: 10,
-        name: "Haiper",
-        developer: "Haiper",
-        description: "User-friendly AI video generator focused on creating engaging social media content. Offers quick generation and various style options.",
-        maxDuration: "8 seconds",
-        resolution: "1080p",
-        pricing: "Free/Premium",
-        bestFor: "Social media content",
-        rating: 4.3,
-        tags: ["Social Media", "Quick Generation", "Style Options"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://haiper.ai"
-    },
-    {
-        id: 11,
-        name: "Pika Labs",
-        developer: "Pika",
-        description: "Advanced video generation with impressive motion control and style consistency. Popular among content creators for its creative capabilities.",
-        maxDuration: "15 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Creative content",
-        rating: 4.5,
-        tags: ["Motion Control", "Style Consistency", "Creative"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://pika.art"
-    },
-    {
-        id: 12,
-        name: "Vidu",
-        developer: "Shengshu AI",
-        description: "High-quality video generation model with excellent temporal consistency and realistic motion. Strong competitor in the AI video generation space.",
-        maxDuration: "16 seconds",
-        resolution: "1080p",
-        pricing: "Free/Premium",
-        bestFor: "Realistic motion",
-        rating: 4.4,
-        tags: ["Temporal Consistency", "Realistic Motion", "High Quality"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://vidu.com"
-    },
-    {
-        id: 13,
-        name: "PixVerse",
-        developer: "PixVerse",
-        description: "Creative video generation platform with unique artistic styles and effects. Great for creating visually stunning and artistic video content.",
-        maxDuration: "10 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Artistic styles",
-        rating: 4.3,
-        tags: ["Artistic Styles", "Visual Effects", "Creative"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://pixverse.ai"
-    },
-    {
-        id: 14,
-        name: "DomoAI",
-        developer: "DomoAI",
-        description: "Specialized in anime and cartoon-style video generation. Perfect for creating animated content and stylized video transformations.",
-        maxDuration: "10 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Anime/Cartoon style",
-        rating: 4.2,
-        tags: ["Anime Style", "Cartoon", "Stylized"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://domoai.app"
-    },
-    {
-        id: 15,
-        name: "Krea AI",
-        developer: "Krea",
-        description: "Real-time video generation and enhancement platform with impressive speed and quality. Great for live content creation and real-time editing.",
-        maxDuration: "10 seconds",
-        resolution: "1080p",
-        pricing: "Freemium",
-        bestFor: "Real-time generation",
-        rating: 4.4,
-        tags: ["Real-Time", "Fast Processing", "Enhancement"],
-        categories: ["text-to-video", "image-to-video", "free"],
-        url: "https://krea.ai"
-    }
+// La Base de données de tes IA (Tu pourras en rajouter 100 ici)
+const modelsData =[
+    { id: 1, name: "Sora", developer: "OpenAI", description: "Revolutionary text-to-video model capable of generating highly realistic and imaginative scenes.", rating: 4.9, tags:["Text-to-Video", "High Quality"], categories: ["text-to-video"], url: "https://openai.com/sora", color: "violet" },
+    { id: 2, name: "Runway Gen-3", developer: "Runway", description: "Industry-leading video generation platform with advanced motion control and style transfer.", rating: 4.8, tags: ["Professional", "Motion Control"], categories:["text-to-video", "image-to-video"], url: "https://runwayml.com", color: "indigo" },
+    { id: 3, name: "Pika 1.0", developer: "Pika Labs", description: "Fast video generation with extended duration capabilities. Real-time editing workflows.", rating: 4.7, tags:["Fast", "Editing", "Web App"], categories:["text-to-video", "image-to-video", "free"], url: "https://pika.art", color: "cyan" },
+    { id: 4, name: "Stable Video", developer: "Stability AI", description: "Image-to-video generation model with 1.3 billion parameters. Highly customizable.", rating: 4.8, tags:["Img2Vid", "Self-hosted", "Free"], categories: ["image-to-video", "free"], url: "https://stability.ai", color: "pink" },
+    { id: 5, name: "Kling", developer: "Kuaishou", description: "Powerful video generation model with impressive motion dynamics.", rating: 4.6, tags: ["Long Duration", "Social Media"], categories:["text-to-video", "free"], url: "https://kling.kuaishou.com", color: "emerald" },
+    { id: 6, name: "HeyGen", developer: "HeyGen", description: "Specialized in creating AI avatar videos with realistic lip-syncing.", rating: 4.7, tags:["AI Avatars", "Lip-Sync"], categories: ["text-to-video"], url: "https://heygen.com", color: "rose" },
+    { id: 7, name: "Synthesia", developer: "Synthesia", description: "Enterprise-focused AI video generation platform for professional training.", rating: 4.5, tags:["Enterprise", "Multi-Language"], categories: ["text-to-video"], url: "https://synthesia.io", color: "blue" },
+    { id: 8, name: "Luma Dream Machine", developer: "Luma AI", description: "Fast and efficient video generation model with excellent quality.", rating: 4.4, tags: ["Fast Generation", "High Quality"], categories: ["text-to-video", "free"], url: "https://lumalabs.ai", color: "fuchsia" }
 ];
 
-// DOM Elements
-let modelsGrid;
-let searchInput;
+// Variables globales
 let currentFilter = 'all';
+let currentPage = 1;
+const itemsPerPage = 6; // Combien on en affiche avant le "Load More"
+let filteredModels = [...modelsData];
 
-// Initialize the page
-document.addEventListener('DOMContentLoaded', function() {
-    modelsGrid = document.getElementById('modelsGrid');
-    searchInput = document.getElementById('searchInput');
-    
-    // Populate models grid
-    renderModels(modelsData);
-    
-    // Add search event listener
-    searchInput.addEventListener('keyup', function(e) {
-        if (e.key === 'Enter') {
-            searchModels();
-        }
-    });
-    
-    // Add smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+// DOM Elements
+const modelsGrid = document.getElementById('modelsGrid');
+const searchInput = document.getElementById('searchInput');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+// Initialisation
+document.addEventListener('DOMContentLoaded', () => {
+    renderModels();
+
+    // Event de Recherche
+    searchInput.addEventListener('input', handleSearch);
+
+    // Event de Filtres
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            // Gérer le style actif
+            filterBtns.forEach(b => {
+                b.classList.remove('bg-violet-600', 'text-white');
+                b.classList.add('text-zinc-300');
+            });
+            e.target.classList.remove('text-zinc-300');
+            e.target.classList.add('bg-violet-600', 'text-white');
+
+            currentFilter = e.target.getAttribute('data-filter');
+            currentPage = 1; // Reset la page
+            filterAndRender();
         });
     });
+
+    // Event Load More
+    loadMoreBtn.addEventListener('click', () => {
+        currentPage++;
+        renderModels(true); // true = ajouter à la suite (append)
+    });
 });
 
-// Render models to the grid
-function renderModels(models) {
-    modelsGrid.innerHTML = '';
+// Logique de filtrage
+function filterAndRender() {
+    const searchTerm = searchInput.value.toLowerCase().trim();
     
-    if (models.length === 0) {
-        modelsGrid.innerHTML = `
-            <div class="no-results">
-                <h3>🔍 No models found</h3>
-                <p>Try adjusting your search or filter criteria.</p>
-            </div>
-        `;
+    filteredModels = modelsData.filter(model => {
+        const matchFilter = currentFilter === 'all' || model.categories.includes(currentFilter);
+        const matchSearch = model.name.toLowerCase().includes(searchTerm) || 
+                            model.description.toLowerCase().includes(searchTerm) ||
+                            model.developer.toLowerCase().includes(searchTerm);
+        return matchFilter && matchSearch;
+    });
+
+    currentPage = 1;
+    renderModels(false);
+}
+
+function handleSearch() {
+    filterAndRender();
+}
+
+// Fonction pour afficher les cartes avec ton Design Premium
+function renderModels(append = false) {
+    if (!append) modelsGrid.innerHTML = '';
+
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const modelsToShow = filteredModels.slice(start, end);
+
+    if (filteredModels.length === 0) {
+        modelsGrid.innerHTML = `<div class="col-span-full text-center text-zinc-400 py-10">Aucun modèle trouvé pour cette recherche.</div>`;
+        loadMoreBtn.style.display = 'none';
         return;
     }
-    
-    models.forEach((model, index) => {
-        const card = createModelCard(model, index);
-        modelsGrid.appendChild(card);
-    });
-}
 
-// Create a model card element
-function createModelCard(model, index) {
-    const card = document.createElement('div');
-    card.className = 'model-card';
-    card.style.animationDelay = `${index * 0.1}s`;
-    
-    const stars = '⭐'.repeat(Math.floor(model.rating)) + '☆'.repeat(5 - Math.floor(model.rating));
-    
-    card.innerHTML = `
-        <h3>🎯 ${model.name}</h3>
-        <p class="developer">🏢 ${model.developer}</p>
-        <p class="description">${model.description}</p>
-        <div class="meta">
-            <div class="meta-item">
-                <span>⏱️</span>
-                <strong>Durée:</strong> ${model.maxDuration}
-            </div>
-            <div class="meta-item">
-                <span>📺</span>
-                <strong>Résolution:</strong> ${model.resolution}
-            </div>
-            <div class="meta-item">
-                <span>💰</span>
-                <strong>Tarification:</strong> ${model.pricing}
-            </div>
-            <div class="meta-item">
-                <span>✨</span>
-                <strong>Idéal Pour:</strong> ${model.bestFor}
-            </div>
-        </div>
-        <div class="tags">
-            ${model.tags.map(tag => `<span class="tag">🏷️ ${tag}</span>`).join('')}
-        </div>
-        <div class="card-footer">
-            <div class="rating">
-                <span>${stars}</span>
-                <span>${model.rating}</span>
-            </div>
-            <a href="${model.url}" target="_blank" class="btn card-btn">🚀 Visiter →</a>
-        </div>
-    `;
-    
-    return card;
-}
+    modelsToShow.forEach((model, index) => {
+        const delay = index * 0.1;
+        // Création du HTML de la carte
+        const cardHTML = `
+            <article class="card-premium rounded-2xl overflow-hidden group cursor-pointer animate-slide-up" style="animation-delay: ${delay}s">
+                <div class="relative h-56 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-${model.color}-600/20 to-${model.color}-900/20 group-hover:scale-110 transition-transform duration-700"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-${model.color}-500 to-${model.color}-700 flex items-center justify-center shadow-2xl shadow-${model.color}-500/30 group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="play" class="w-10 h-10 text-white"></i>
+                        </div>
+                    </div>
+                </div>
 
-// Filter models by category
-function filterModels(category) {
-    currentFilter = category;
-    
-    // Update active button
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <h3 class="font-display text-xl font-bold text-white mb-1 group-hover:text-${model.color}-400 transition-colors">${model.name}</h3>
+                            <div class="flex items-center gap-2 text-sm text-zinc-500">
+                                <span>by ${model.developer}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-zinc-800 px-2 py-1 rounded-lg border border-zinc-700">
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500 fill-yellow-500"></i>
+                            <span class="text-sm font-bold text-white">${model.rating}</span>
+                        </div>
+                    </div>
+
+                    <p class="text-zinc-400 text-sm mb-4 line-clamp-2 leading-relaxed h-10">
+                        ${model.description}
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 mb-6 h-8">
+                        ${model.tags.map(tag => `<span class="px-2.5 py-1 rounded-md bg-zinc-800/50 border border-zinc-700/50 text-xs text-zinc-400">${tag}</span>`).join('')}
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="${model.url}" target="_blank" class="flex-1 py-2.5 rounded-xl bg-white text-black font-semibold text-sm hover:bg-zinc-200 transition-all duration-200 flex items-center justify-center gap-2 button-glow">
+                            <span>Tester</span>
+                            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        `;
+        modelsGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
-    event.target.classList.add('active');
-    
-    // Filter models
-    let filteredModels;
-    if (category === 'all') {
-        filteredModels = modelsData;
+
+    // Recharger les icônes Lucide pour les nouvelles cartes
+    lucide.createIcons();
+
+    // Gérer l'affichage du bouton Load More
+    if (end >= filteredModels.length) {
+        loadMoreBtn.style.display = 'none';
     } else {
-        filteredModels = modelsData.filter(model => 
-            model.categories.includes(category)
-        );
+        loadMoreBtn.style.display = 'flex';
     }
-    
-    // Apply current search if any
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    if (searchTerm) {
-        filteredModels = filteredModels.filter(model =>
-            model.name.toLowerCase().includes(searchTerm) ||
-            model.developer.toLowerCase().includes(searchTerm) ||
-            model.description.toLowerCase().includes(searchTerm) ||
-            model.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-        );
-    }
-    
-    renderModels(filteredModels);
 }
-
-// Search models
-function searchModels() {
-    const searchTerm = searchInput.value.toLowerCase().trim();
-    
-    // Start with current filter
-    let filteredModels;
-    if (currentFilter === 'all') {
-        filteredModels = modelsData;
-    } else {
-        filteredModels = modelsData.filter(model => 
-            model.categories.includes(currentFilter)
-        );
-    }
-    
-    // Apply search
-    if (searchTerm) {
-        filteredModels = filteredModels.filter(model =>
-            model.name.toLowerCase().includes(searchTerm) ||
-            model.developer.toLowerCase().includes(searchTerm) ||
-            model.description.toLowerCase().includes(searchTerm) ||
-            model.tags.some(tag => tag.toLowerCase().includes(searchTerm)) ||
-            model.bestFor.toLowerCase().includes(searchTerm)
-        );
-    }
-    
-    renderModels(filteredModels);
-}
-
-// Add keyboard navigation
-document.addEventListener('keydown', function(e) {
-    // Press '/' to focus search
-    if (e.key === '/' && document.activeElement !== searchInput) {
-        e.preventDefault();
-        searchInput.focus();
-    }
-    
-    // Press 'Escape' to clear search
-    if (e.key === 'Escape' && document.activeElement === searchInput) {
-        searchInput.value = '';
-        searchInput.blur();
-        filterModels(currentFilter);
-    }
-});
-
-// Add intersection observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
-
-// Observe sections for scroll animations
-document.querySelectorAll('.section').forEach(section => {
-    observer.observe(section);
-});
-
-// Console welcome message
-console.log('%c🎬 ValtLens', 'font-size: 20px; font-weight: bold; color: #8b5cf6;');
-console.log('%c✨ Welcome to the AI Video Generation Models Directory!', 'font-size: 14px; color: #06b6d4;');
-console.log('🔍 Press "/" to focus search, "Escape" to clear.');
