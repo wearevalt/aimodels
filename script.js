@@ -254,8 +254,8 @@ function renderModels(models) {
     if (models.length === 0) {
         modelsGrid.innerHTML = `
             <div class="no-results">
-                <h3>🔍 Aucun modèle trouvé</h3>
-                <p>Essayez d'ajuster vos critères de recherche ou de filtrage.</p>
+                <h3>🔍 No models found</h3>
+                <p>Try adjusting your search or filter criteria.</p>
             </div>
         `;
         return;
@@ -282,19 +282,19 @@ function createModelCard(model, index) {
         <div class="meta">
             <div class="meta-item">
                 <span>⏱️</span>
-                <strong>Durée:</strong> ${model.maxDuration}
+                <strong>Duration:</strong> ${model.maxDuration}
             </div>
             <div class="meta-item">
                 <span>📺</span>
-                <strong>Résolution:</strong> ${model.resolution}
+                <strong>Resolution:</strong> ${model.resolution}
             </div>
             <div class="meta-item">
                 <span>💰</span>
-                <strong>Tarification:</strong> ${model.pricing}
+                <strong>Pricing:</strong> ${model.pricing}
             </div>
             <div class="meta-item">
                 <span>✨</span>
-                <strong>Idéal Pour:</strong> ${model.bestFor}
+                <strong>Best For:</strong> ${model.bestFor}
             </div>
         </div>
         <div class="tags">
@@ -305,7 +305,7 @@ function createModelCard(model, index) {
                 <span>${stars}</span>
                 <span>${model.rating}</span>
             </div>
-            <a href="${model.url}" target="_blank" class="btn card-btn">🚀 Visiter →</a>
+            <a href="${model.url}" target="_blank" class="btn card-btn">🚀 Visit →</a>
         </div>
     `;
     
@@ -411,6 +411,6 @@ document.querySelectorAll('.section').forEach(section => {
 });
 
 // Console welcome message
-console.log('%c🎬 Répertoire IA Vidéo', 'font-size: 20px; font-weight: bold; color: #8b5cf6;');
-console.log('%c✨ Bienvenue dans le Répertoire des Modèles de Génération Vidéo IA !', 'font-size: 14px; color: #06b6d4;');
-console.log('🔍 Appuyez sur "/" pour focus la recherche, "Escape" pour effacer.');
+console.log('%c🎬 ValtLens', 'font-size: 20px; font-weight: bold; color: #8b5cf6;');
+console.log('%c✨ Welcome to the AI Video Generation Models Directory!', 'font-size: 14px; color: #06b6d4;');
+console.log('🔍 Press "/" to focus search, "Escape" to clear.');
