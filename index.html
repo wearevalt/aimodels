@@ -184,7 +184,7 @@ footer{border-top:1px solid var(--border);background:#050506;padding:3.5rem clam
     </div>
     <div class="nav-actions">
       <button class="btn-outline" onclick="showToast('⭐ Merci pour votre support !')">★ Star</button>
-      <button class="btn-cta" onclick="showToast('🚀 Formulaire bientôt disponible !')">Soumettre une IA</button>
+      <a class="btn-cta" href="/submit/">Soumettre une IA</a>
     </div>
   </div>
 </nav>
@@ -265,13 +265,13 @@ footer{border-top:1px solid var(--border);background:#050506;padding:3.5rem clam
       <div class="section-title">Le Journal de l'IA</div>
       <div class="section-sub">Restez à l'avant-garde. Découvrez les derniers modèles avant tout le monde.</div>
     </div>
-    <button class="see-all" onclick="showToast('Blog complet bientôt disponible !')">
+    <a class="see-all" href="/blog/">
       Tous les articles
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </button>
   </div>
   <div class="blog-grid">
-    <a class="article" onclick="showToast('Article bientôt disponible !')">
+    <a class="article" href="/blog/article/?id=sora-public">
       <div class="article-img">
         <div class="article-img-inner" style="background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(79,70,229,.3))">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-linecap="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
@@ -284,7 +284,7 @@ footer{border-top:1px solid var(--border);background:#050506;padding:3.5rem clam
         <div class="article-meta">Aujourd'hui <span class="meta-dot"></span> 3 min de lecture</div>
       </div>
     </a>
-    <a class="article" onclick="showToast('Article bientôt disponible !')">
+    <a class="article" href="/blog/article/?id=luma-guide">
       <div class="article-img">
         <div class="article-img-inner" style="background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(16,185,129,.2))">
           <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
@@ -415,20 +415,27 @@ function renderModels(append) {
     var c = MODEL_COLORS[m.color] || MODEL_COLORS.violet;
     var card = document.createElement('article');
     card.className = 'card';
-    card.innerHTML =
-      '<div class="card-img">' +
-        '<div class="card-img-bg" style="background:' + c.bg + '"></div>' +
-        '<div class="card-icon" style="background:' + c.icon + ';box-shadow:0 8px 24px ' + c.shadow + '">' + PLAY_SVG + '</div>' +
-      '</div>' +
-      '<div class="card-body">' +
-        '<div class="card-top">' +
-          '<div><div class="card-name">' + m.name + '</div><div class="card-dev">by ' + m.developer + '</div></div>' +
-          '<div class="card-rating">' + STAR_SVG + '<span>' + m.rating + '</span></div>' +
+    card.style.cursor = 'pointer';
+    (function(model, color) {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.card-cta')) return;
+        window.location.href = '/model?id=' + model.id;
+      });
+      card.innerHTML =
+        '<div class="card-img">' +
+          '<div class="card-img-bg" style="background:' + color.bg + '"></div>' +
+          '<div class="card-icon" style="background:' + color.icon + ';box-shadow:0 8px 24px ' + color.shadow + '">' + PLAY_SVG + '</div>' +
         '</div>' +
-        '<div class="card-desc">' + m.description + '</div>' +
-        '<div class="card-tags">' + m.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
-        '<a class="card-cta" href="' + m.url + '" target="_blank" rel="noopener">Tester ' + ARROW_SVG + '</a>' +
-      '</div>';
+        '<div class="card-body">' +
+          '<div class="card-top">' +
+            '<div><div class="card-name">' + model.name + '</div><div class="card-dev">by ' + model.developer + '</div></div>' +
+            '<div class="card-rating">' + STAR_SVG + '<span>' + model.rating + '</span></div>' +
+          '</div>' +
+          '<div class="card-desc">' + model.description + '</div>' +
+          '<div class="card-tags">' + model.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' +
+          '<a class="card-cta" href="' + model.url + '" target="_blank" rel="noopener" onclick="event.stopPropagation()">Tester ' + ARROW_SVG + '</a>' +
+        '</div>';
+    })(m, c);
     grid.appendChild(card);
   });
 
